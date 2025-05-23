@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Validador IA - Tradução</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <h1>Avaliação de Tradução (IA)</h1>
+
+    <label for="input-original">Texto Original:</label>
+    <textarea id="input-original" rows="6" placeholder="Cole aqui o texto original..."></textarea>
+
+    <label for="input-traducao">Texto Traduzido:</label>
+    <textarea id="input-traducao" rows="6" placeholder="Cole aqui a tradução..."></textarea>
+
+    <button onclick="executarAvaliacoes()">Avaliar Tradução</button>
+
+    <hr />
+
+    <h2>Step 3: Nome do Documento Detectado</h2>
+    <pre id="output-doc-name">---</pre>
+
+    <h2>Step 4: Revisão da Tradução</h2>
+    <pre id="output-review">---</pre>
+
+    <h2>Step 5: Lista de Ajustes</h2>
+    <pre id="output-todo">---</pre>
+
+    <h2>Step 6: Veredito Final</h2>
+    <pre id="output-judge">---</pre>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
