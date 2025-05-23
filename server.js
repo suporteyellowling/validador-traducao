@@ -24,6 +24,10 @@ app.post('/avaliar/doc-name', async (req, res) => {
   const { original } = req.body;
 
   const prompt = `
+
+Idioma de origem: Português
+Idioma de destino: Italiano
+
 Você é um classificador de documentos oficiais. Seu trabalho é analisar o texto original fornecido abaixo e identificar com precisão o tipo de documento que ele representa. 
 Você deve retornar apenas o nome do documento identificado, sem explicações adicionais.
 
@@ -62,6 +66,10 @@ app.post('/avaliar/review', async (req, res) => {
   const { original, traducao } = req.body;
 
   const prompt = `
+
+Idioma de origem: Português
+Idioma de destino: Italiano
+
 Você é um agente revisor de traduções oficiais. Sua tarefa é comparar o texto original e a tradução fornecida e listar qualquer erro, inconsistência, ou problema linguístico encontrado.
 
 Considere erros de:
@@ -102,6 +110,10 @@ app.post('/avaliar/todo', async (req, res) => {
   const { original, traducao } = req.body;
 
   const prompt = `
+
+Idioma de origem: Português
+Idioma de destino: Italiano
+
 Você é um agente especialista em tradução de documentos oficiais. Com base na comparação entre o texto original e sua tradução, gere uma lista de tarefas que o tradutor deve executar para melhorar a qualidade da tradução.
 
 A lista deve ser objetiva e prática, incluindo ações como:
@@ -141,6 +153,10 @@ app.post('/avaliar/judge', async (req, res) => {
   const { original, traducao } = req.body;
 
   const prompt = `
+
+Idioma de origem: Português
+Idioma de destino: Italiano
+
 Você é uma IA jurista especialista em análise de traduções de documentos oficiais para fins de imigração.
 
 Sua tarefa é avaliar se a tradução fornecida está correta, fiel ao texto original, e com terminologias apropriadas para o tipo de documento.
