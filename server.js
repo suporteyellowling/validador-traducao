@@ -85,7 +85,7 @@ app.post('/avaliar/review', async (req, res) => {
 
       📌 Formato de saída:
       Para cada erro identificado, use o formato:
-      "[trecho com problema]" --> "[versão corrigida sugerida]"
+      - Erro encontrado
 
       🟢 Se não encontrar problemas, diga:
       "Nenhum problema identificado."
@@ -137,7 +137,8 @@ app.post('/avaliar/todo', async (req, res) => {
 
         Formato:
         - Para cada erro, use:
-          "- Correção necessária: ..."
+          "- Correção necessária: '[trecho com problema]' -----> '[versão corrigida sugerida]'"
+
         - Se não houver problemas:
           "Nenhum ajuste necessário."
 
