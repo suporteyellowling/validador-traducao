@@ -69,7 +69,7 @@ app.post('/avaliar/review', async (req, res) => {
 
 Idioma de destino: Italiano
 
-Você é um agente revisor de traduções oficiais. Sua tarefa é comparar o texto original e a tradução fornecida e listar qualquer erro, inconsistência, ou problema linguístico encontrado.
+Você é um agente revisor de traduções oficiais. Sua tarefa é comparar o texto original e a tradução fornecida e listar erros, inconsistência, terminologias encontradas ou problema linguístico .
 
 Considere erros de:
 - Vocabulário incorreto ou mal traduzido
@@ -109,16 +109,20 @@ app.post('/avaliar/todo', async (req, res) => {
   const { original, traducao } = req.body;
 
       const prompt = `
-      Você é um agente de tradução encarregado de revisar e sugerir **apenas os ajustes realmente necessários** em uma tradução oficial entre os idiomas abaixo:
+      Você é um tradutor juramentado e está encarregado de revisar e sugerir ajustes em uma tradução oficial entre os idiomas abaixo:
 
   
+            Texto original (Português):
+      """${original}"""
+
+      Tradução (Italiano):
+      """${traducao}"""
 
       Sua tarefa:
       - Compare cada trecho do texto original com sua tradução.
       - Liste **apenas os ajustes relevantes**, onde houver erro de vocabulário, gramática, contexto ou inconsistência real.
       - Evite redundâncias: **se o termo já estiver traduzido corretamente, não inclua.**
       - **Não corrija nomes próprios, documentos, números de CPF, códigos, e-mails ou locais que devem permanecer inalterados.**
-      - Não sugira mudanças se a diferença for apenas de estilo ou preferências regionais.
 
       Formato de saída:
       - Se houver ajustes necessários, use:
@@ -126,11 +130,7 @@ app.post('/avaliar/todo', async (req, res) => {
       - Se tudo estiver correto, diga:
         - "Nenhum ajuste necessário."
 
-      Texto original (Português):
-      """${original}"""
 
-      Tradução (Italiano):
-      """${traducao}"""
       `;
 
 
