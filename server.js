@@ -67,7 +67,6 @@ app.post('/avaliar/review', async (req, res) => {
 
   const prompt = `
 
-Idioma de origem: Português
 Idioma de destino: Italiano
 
 Você é um agente revisor de traduções oficiais. Sua tarefa é comparar o texto original e a tradução fornecida e listar qualquer erro, inconsistência, ou problema linguístico encontrado.
@@ -111,7 +110,6 @@ app.post('/avaliar/todo', async (req, res) => {
 
   const prompt = `
 
-Idioma de origem: Português
 Idioma de destino: Italiano
 
 Você é um agente especialista em tradução de documentos oficiais. Com base na comparação entre o texto original e sua tradução, gere uma lista de tarefas que o tradutor deve executar para melhorar a qualidade da tradução.
@@ -154,7 +152,6 @@ app.post('/avaliar/judge', async (req, res) => {
 
   const prompt = `
 
-Idioma de origem: Português
 Idioma de destino: Italiano
 
 Você é uma IA jurista especialista em análise de traduções de documentos oficiais para fins de imigração.
