@@ -69,17 +69,17 @@ app.post('/avaliar/review', async (req, res) => {
 
 Idioma de destino: Italiano
 
-Você é um agente revisor de traduções oficiais. Sua tarefa é comparar o texto original e a tradução fornecida e listar erros, inconsistência, terminologias encontradas ou problema linguístico .
+Você é um tradutor juramentado de traduções oficiais. Sua tarefa é avaliar a qualidade da tradução (erros, inconsistência, terminologias encontradas ou problema linguístico), tendo em vista o texto original inserido.
 
 Considere erros de:
 - Vocabulário incorreto ou mal traduzido
 - Tradução literal inadequada
 - Termos jurídicos ou técnicos mal empregados
-- Nomes, datas ou números inconsistentes
+- Nomes, datas ou números divergentes do original
 - Pontuação ou formatação incorreta
 
 Formato de saída esperado:
-- Liste os problemas encontrados, cada um em uma linha.
+- Liste os problemas encontrados, cada um em uma linha. Ou seja, você colocará como está na tradução, incluirá "-->" para separar e depois colocará a tradução que você, como tradutor juramentado, acredita que tenha que ser.
 - Se não houver problemas, diga: "Nenhum problema identificado."
 
 Texto original:
