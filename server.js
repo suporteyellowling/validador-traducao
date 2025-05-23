@@ -109,28 +109,30 @@ app.post('/avaliar/todo', async (req, res) => {
   const { original, traducao } = req.body;
 
       const prompt = `
-    Você é um agente de tradução responsável por revisar e sugerir melhorias em uma tradução de documento oficial.
+      Você é um agente de tradução encarregado de revisar e sugerir **apenas os ajustes realmente necessários** em uma tradução oficial entre os idiomas abaixo:
 
-    Sua função é gerar uma lista de ações concretas que o tradutor pode executar para melhorar a qualidade da tradução.
+  
 
-    Regras:
-    - Compare os trechos do original com os da tradução.
-    - Liste apenas correções **reais**. Evite sugerir mudanças se o termo já estiver correto.
-    - Se uma tradução já estiver adequada, **não a inclua** na lista.
-    - Seja direto e profissional, focando em trechos problemáticos ou que podem ser aprimorados.
+      Sua tarefa:
+      - Compare cada trecho do texto original com sua tradução.
+      - Liste **apenas os ajustes relevantes**, onde houver erro de vocabulário, gramática, contexto ou inconsistência real.
+      - Evite redundâncias: **se o termo já estiver traduzido corretamente, não inclua.**
+      - **Não corrija nomes próprios, documentos, números de CPF, códigos, e-mails ou locais que devem permanecer inalterados.**
+      - Não sugira mudanças se a diferença for apenas de estilo ou preferências regionais.
 
-    Idioma de destino: Italiano
+      Formato de saída:
+      - Se houver ajustes necessários, use:
+        - "- Correção necessária: ..."
+      - Se tudo estiver correto, diga:
+        - "Nenhum ajuste necessário."
 
-    Formato da resposta:
-    - Se houver ajustes: lista começando com "- "
-    - Se tudo estiver certo: escreva "Nenhum ajuste necessário."
+      Texto original (Português):
+      """${original}"""
 
-    Texto original:
-    """${original}"""
+      Tradução (Italiano):
+      """${traducao}"""
+      `;
 
-    Tradução:
-    """${traducao}"""
-    `;
 
 
   try {
@@ -160,11 +162,11 @@ Você é uma IA jurista especialista em análise de traduções de documentos of
 
 Sua tarefa é avaliar se a tradução fornecida está correta, fiel ao texto original, e com terminologias apropriadas para o tipo de documento.
 
-Texto original:
-"""${original}"""
+      Texto original (Português):
+      """${original}"""
 
-Tradução:
-"""${traducao}"""
+      Tradução (Italiano):
+      """${traducao}"""
 
 CRITÉRIOS DE REJEIÇÃO OBRIGATÓRIA:
 - Erros em nomes de pessoas
