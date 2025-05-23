@@ -137,7 +137,7 @@ app.post('/avaliar/todo', async (req, res) => {
 
         Formato:
         - Para cada erro, use:
-          "- Correção necessária: '[trecho com problema]' -----> '[versão corrigida sugerida]'"
+          "- Correção necessária: '[trecho incorreto que está na tradução]' -----> '[como deve ser corrigido]'"
 
         - Se não houver problemas:
           "Nenhum ajuste necessário."
