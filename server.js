@@ -108,28 +108,30 @@ Tradução:
 app.post('/avaliar/todo', async (req, res) => {
   const { original, traducao } = req.body;
 
-  const prompt = `
+      const prompt = `
+    Você é um agente de tradução responsável por revisar e sugerir melhorias em uma tradução de documento oficial.
 
-Idioma de destino: Italiano
+    Sua função é gerar uma lista de ações concretas que o tradutor pode executar para melhorar a qualidade da tradução.
 
-Você é um agente especialista em tradução de documentos oficiais. Com base na comparação entre o texto original e sua tradução, gere uma lista de tarefas que o tradutor deve executar para melhorar a qualidade da tradução.
+    Regras:
+    - Compare os trechos do original com os da tradução.
+    - Liste apenas correções **reais**. Evite sugerir mudanças se o termo já estiver correto.
+    - Se uma tradução já estiver adequada, **não a inclua** na lista.
+    - Seja direto e profissional, focando em trechos problemáticos ou que podem ser aprimorados.
 
-A lista deve ser objetiva e prática, incluindo ações como:
-- Corrigir termos específicos
-- Reescrever trechos com ambiguidade
-- Ajustar nomes ou dados inconsistentes
-- Aplicar terminologias jurídicas ou acadêmicas adequadas
+    Idioma de destino: Italiano
 
-Formato de saída esperado:
-- Lista de ações a serem feitas, começando cada item com "- ".
-- Se tudo estiver correto, diga: "Nenhum ajuste necessário."
+    Formato da resposta:
+    - Se houver ajustes: lista começando com "- "
+    - Se tudo estiver certo: escreva "Nenhum ajuste necessário."
 
-Texto original:
-"""${original}"""
+    Texto original:
+    """${original}"""
 
-Tradução:
-"""${traducao}"""
-`;
+    Tradução:
+    """${traducao}"""
+    `;
+
 
   try {
     const response = await openai.chat.completions.create({
