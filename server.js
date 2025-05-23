@@ -67,33 +67,31 @@ app.post('/avaliar/review', async (req, res) => {
 
   const prompt = `
 
-        Você é um tradutor juramentado com experiência em revisar traduções oficiais entre Português e Italiano. 
+      Você é um tradutor juramentado italiano, especialista em documentos oficiais.
 
-      Sua tarefa é identificar **erros ou inconsistências reais** na tradução fornecida. Avalie com cuidado se a tradução está fiel, correta e adequada ao contexto legal.
+      Sua tarefa é revisar o texto traduzido para o italiano como se fosse o documento final entregue, **sem consultar o original em português**.
 
-      Considere como erro:
-      - Termos técnicos incorretos
-      - Traduções literais que distorcem o sentido
-      - Vocabulário inadequado ou impróprio
-      - Nomes, datas, números mal traduzidos
-      - Formatação errada em comparação com o original
+      Você deve identificar:
+      - Erros gramaticais ou de concordância
+      - Vocabulário inadequado
+      - Termos mal utilizados no contexto jurídico
+      - Palavras mal escritas ou inexistentes no idioma italiano
+      - Falta de naturalidade ou fluidez na redação
 
-      ⚠️ Muito importante:
-      - NÃO apresente todas as frases traduzidas. 
-      - Liste apenas os trechos onde HOUVE ERRO.
-      - Evite elogiar ou dar notas.
+      ⚠️ Importante:
+      - Analise apenas o texto em italiano como um documento isolado.
+      - NÃO compare com o português.
+      - Aja como se estivesse revisando um documento jurídico já traduzido para verificar sua conformidade linguística e legal.
+      - NÃO invente erros.
 
-      📌 Formato de saída:
-      Para cada erro identificado, use o formato:
-      - Erro encontrado
+      🧾 Formato de saída:
+      - Para cada erro encontrado, use:
+        "- Erro: [trecho em italiano] → [forma correta sugerida]"
 
-      🟢 Se não encontrar problemas, diga:
+      ✅ Se não houver erros, diga apenas:
       "Nenhum problema identificado."
 
-      Texto original (Português):
-      """${original}"""
-
-      Tradução (Italiano):
+      Texto traduzido (Italiano):
       """${traducao}"""
 
 `;
@@ -118,35 +116,38 @@ app.post('/avaliar/todo', async (req, res) => {
   const { original, traducao } = req.body;
 
       const prompt = `
-        Você é um revisor profissional de traduções juramentadas entre Português e Italiano.
+        
+      Você é um tradutor juramentado especialista em traduções do português para o italiano.
 
-        Tarefa:
-        Analise o texto original e a tradução fornecida, e **gere uma lista de correções reais necessárias**.
+Sua tarefa é comparar o texto original com a tradução fornecida, e retornar **somente as partes que exigem correção**, com base no seu conhecimento técnico e jurídico.
 
-        ❗ Importante:
-        - NÃO invente palavras que não estão no texto.
-        - Corrija somente quando houver divergência real.
-        - NÃO corrija nomes próprios, números, e-mails, códigos, locais.
-        - Se um trecho estiver correto, ignore.
+📌 Para cada erro, apresente:
+- A frase **exatamente como foi escrita na tradução**
+- Ao lado, a frase **corrigida**, como você entregaria oficialmente
 
-        🔍 Procure erros de:
-        - Vocabulário mal traduzido
-        - Gramática inadequada
-        - Termos técnicos incorretos
-        - Concordância ou fluidez
+⚠️ Regras:
+- NÃO inclua trechos que estiverem corretos
+- NÃO corrija nomes próprios, documentos, códigos, datas, e-mails ou números de identificação
+- NÃO invente trechos que não existem na tradução fornecida
+- Use **toda sua experiência como tradutor juramentado** para sugerir apenas o que for realmente necessário
 
-        Formato:
-        - Para cada erro, use:
-          "- Correção necessária: '[trecho incorreto que está na tradução]' -----> '[como deve ser corrigido]'"
+🧾 Formato de saída:
+- Texto incorreto: "[trecho da tradução]"
+- Texto corrigido: "[forma correta que deveria estar]"
 
-        - Se não houver problemas:
-          "Nenhum ajuste necessário."
+Exemplo:
+- Texto incorreto: "mez di dicembre"
+- Texto corrigido: "mese di dicembre"
 
-        Texto original (Português):
-        """${original}"""
+✅ Se tudo estiver certo, diga:
+"Nenhum ajuste necessário."
 
-        Tradução (Italiano):
-        """${traducao}"""
+Texto original (Português):
+"""${original}"""
+
+Tradução fornecida (Italiano):
+"""${traducao}"""
+
 
       `;
 
