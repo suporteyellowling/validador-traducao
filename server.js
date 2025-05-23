@@ -67,26 +67,35 @@ app.post('/avaliar/review', async (req, res) => {
 
   const prompt = `
 
-Idioma de destino: Italiano
+        Você é um tradutor juramentado com experiência em revisar traduções oficiais entre Português e Italiano. 
 
-Você é um tradutor juramentado de traduções oficiais. Sua tarefa é avaliar a qualidade da tradução (erros, inconsistência, terminologias encontradas ou problema linguístico), tendo em vista o texto original inserido.
+      Sua tarefa é identificar **erros ou inconsistências reais** na tradução fornecida. Avalie com cuidado se a tradução está fiel, correta e adequada ao contexto legal.
 
-Considere erros de:
-- Vocabulário incorreto ou mal traduzido
-- Tradução literal inadequada
-- Termos jurídicos ou técnicos mal empregados
-- Nomes, datas ou números divergentes do original
-- Pontuação ou formatação incorreta
+      Considere como erro:
+      - Termos técnicos incorretos
+      - Traduções literais que distorcem o sentido
+      - Vocabulário inadequado ou impróprio
+      - Nomes, datas, números mal traduzidos
+      - Formatação errada em comparação com o original
 
-Formato de saída esperado:
-- Liste os problemas encontrados, cada um em uma linha. Ou seja, você colocará como está na tradução, incluirá "-->" para separar e depois colocará a tradução que você, como tradutor juramentado, acredita que tenha que ser.
-- Se não houver problemas, diga: "Nenhum problema identificado."
+      ⚠️ Muito importante:
+      - NÃO apresente todas as frases traduzidas. 
+      - Liste apenas os trechos onde HOUVE ERRO.
+      - Evite elogiar ou dar notas.
 
-Texto original:
-"""${original}"""
+      📌 Formato de saída:
+      Para cada erro identificado, use o formato:
+      "[trecho com problema]" --> "[versão corrigida sugerida]"
 
-Tradução:
-"""${traducao}"""
+      🟢 Se não encontrar problemas, diga:
+      "Nenhum problema identificado."
+
+      Texto original (Português):
+      """${original}"""
+
+      Tradução (Italiano):
+      """${traducao}"""
+
 `;
 
   try {
@@ -109,31 +118,36 @@ app.post('/avaliar/todo', async (req, res) => {
   const { original, traducao } = req.body;
 
       const prompt = `
-      Você é um tradutor juramentado e está encarregado de revisar e sugerir ajustes em uma tradução oficial entre os idiomas abaixo:
+        Você é um revisor profissional de traduções juramentadas entre Português e Italiano.
 
-  
-            Texto original (Português):
-      """${original}"""
+        Tarefa:
+        Analise o texto original e a tradução fornecida, e **gere uma lista de correções reais necessárias**.
 
-      Tradução (Italiano):
-      """${traducao}"""
+        ❗ Importante:
+        - NÃO invente palavras que não estão no texto.
+        - Corrija somente quando houver divergência real.
+        - NÃO corrija nomes próprios, números, e-mails, códigos, locais.
+        - Se um trecho estiver correto, ignore.
 
-      Sua tarefa:
-      - Compare cada trecho do texto original com sua tradução.
-      - Liste **apenas os ajustes relevantes**, onde houver erro de vocabulário, gramática, contexto ou inconsistência real.
-      - Evite redundâncias: **se o termo já estiver traduzido corretamente, não inclua.**
-      - **Não corrija nomes próprios, documentos, números de CPF, códigos, e-mails ou locais que devem permanecer inalterados.**
+        🔍 Procure erros de:
+        - Vocabulário mal traduzido
+        - Gramática inadequada
+        - Termos técnicos incorretos
+        - Concordância ou fluidez
 
-      Formato de saída:
-      - Se houver ajustes necessários, use:
-        - "- Correção necessária: ..."
-      - Se tudo estiver correto, diga:
-        - "Nenhum ajuste necessário."
+        Formato:
+        - Para cada erro, use:
+          "- Correção necessária: ..."
+        - Se não houver problemas:
+          "Nenhum ajuste necessário."
 
+        Texto original (Português):
+        """${original}"""
+
+        Tradução (Italiano):
+        """${traducao}"""
 
       `;
-
-
 
   try {
     const response = await openai.chat.completions.create({
