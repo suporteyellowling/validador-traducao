@@ -67,32 +67,22 @@ app.post('/avaliar/review', async (req, res) => {
 
   const prompt = `
 
-      Você é um tradutor juramentado italiano, especialista em documentos oficiais.
+      Você é um revisor linguístico italiano, especialista em traduções juramentadas.
 
-      Sua tarefa é revisar o texto traduzido para o italiano como se fosse o documento final entregue, **sem consultar o original em português**.
+Sua tarefa é revisar apenas o texto em italiano como se fosse o documento final traduzido, identificando **problemas reais** de gramática, vocabulário ou uso inadequado da língua.
 
-      Você deve identificar:
-      - Erros gramaticais ou de concordância
-      - Vocabulário inadequado
-      - Termos mal utilizados no contexto jurídico
-      - Palavras mal escritas ou inexistentes no idioma italiano
-      - Falta de naturalidade ou fluidez na redação
+⚠️ O texto deve ser tratado como final. Não compare com o texto original. Ignore informações como nomes, números, datas, documentos e códigos.
 
-      ⚠️ Importante:
-      - Analise apenas o texto em italiano como um documento isolado.
-      - NÃO compare com o português.
-      - Aja como se estivesse revisando um documento jurídico já traduzido para verificar sua conformidade linguística e legal.
-      - NÃO invente erros.
+🛑 NÃO invente erros. NÃO repita nomes ou datas como se fossem problemas. Só identifique um erro se o termo estiver realmente incorreto ou inadequado para italiano jurídico.
 
-      🧾 Formato de saída:
-      - Para cada erro encontrado, use:
-        "- Erro: [trecho em italiano] → [forma correta sugerida]"
+✅ Liste apenas os erros REAIS, neste formato:
+- "[trecho com problema]" → "[forma correta sugerida]"
 
-      ✅ Se não houver erros, diga apenas:
-      "Nenhum problema identificado."
+Se estiver tudo correto:
+"Nenhum problema identificado."
 
-      Texto traduzido (Italiano):
-      """${traducao}"""
+Texto (em italiano):
+"""${traducao}"""
 
 `;
 
